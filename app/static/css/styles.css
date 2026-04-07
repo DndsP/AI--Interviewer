@@ -1,0 +1,240 @@
+:root {
+  --bg: #f5efe6;
+  --bg-strong: #e6ddcf;
+  --panel: rgba(255, 252, 247, 0.88);
+  --ink: #1f2933;
+  --muted: #5f6c7b;
+  --accent: #0d9488;
+  --accent-2: #f97316;
+  --danger: #dc2626;
+  --border: rgba(31, 41, 51, 0.12);
+  --shadow: 0 24px 60px rgba(60, 47, 32, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(13, 148, 136, 0.18), transparent 28%),
+    linear-gradient(135deg, var(--bg), #fbf8f3 55%, var(--bg-strong));
+}
+
+.shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero,
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.hero {
+  grid-template-columns: 1.5fr 1fr;
+  align-items: stretch;
+  margin-bottom: 1.25rem;
+}
+
+.grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+}
+
+.panel,
+.status-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow,
+.label {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+pre {
+  margin-top: 0;
+}
+
+.lead,
+#state-detail,
+#question-focus,
+.feedback,
+.meta,
+pre {
+  color: var(--muted);
+}
+
+form,
+.controls,
+.stats,
+.score-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), #14b8a6);
+  color: white;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+button:hover:enabled {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#stop-speech-btn {
+  background: linear-gradient(135deg, var(--danger), #ef4444);
+}
+
+.stats,
+.score-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stats div,
+.score-grid div {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+}
+
+.stats span,
+.score-grid span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.stats strong,
+.score-grid strong {
+  font-size: 1.15rem;
+}
+
+.question-card {
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(13, 148, 136, 0.08);
+}
+
+.wave {
+  display: flex;
+  align-items: end;
+  gap: 0.45rem;
+  height: 110px;
+  margin-bottom: 1rem;
+}
+
+.wave span {
+  width: 14px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+  transform-origin: bottom;
+  animation: restPulse 1.8s ease-in-out infinite;
+  opacity: 0.45;
+}
+
+.wave span:nth-child(2) { animation-delay: 0.1s; }
+.wave span:nth-child(3) { animation-delay: 0.2s; }
+.wave span:nth-child(4) { animation-delay: 0.3s; }
+.wave span:nth-child(5) { animation-delay: 0.4s; }
+
+.wave[data-state="speaking"] span,
+.wave[data-state="listening"] span {
+  opacity: 1;
+  animation: activeWave 0.9s ease-in-out infinite;
+}
+
+.wave[data-state="processing"] span {
+  opacity: 0.9;
+  animation: thinkingWave 1.2s ease-in-out infinite;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 18px;
+  padding: 1rem;
+  min-height: 220px;
+}
+
+@keyframes activeWave {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1.7); }
+}
+
+@keyframes thinkingWave {
+  0%, 100% { transform: scaleY(0.6); }
+  50% { transform: scaleY(1.15); }
+}
+
+@keyframes restPulse {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(0.8); }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

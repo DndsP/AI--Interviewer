@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Interview System</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Production-ready interview assistant</p>
+        <h1>Run adaptive AI interviews from resume to hiring report.</h1>
+        <p class="lead">
+          Upload a resume, align it to a job description, let the interviewer ask adaptive questions,
+          and review answer-by-answer scoring with a final hiring recommendation.
+        </p>
+      </div>
+      <div class="status-card">
+        <div class="wave" id="voice-wave" data-state="idle">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="status-stack">
+          <p class="label">Current state</p>
+          <h2 id="voice-state">Idle</h2>
+          <p id="state-detail">Upload a resume and start the interview flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h3>1. Setup Interview</h3>
+        <form id="upload-form">
+          <label>
+            Resume PDF
+            <input type="file" id="resume" accept=".pdf" required />
+          </label>
+          <label>
+            Job Description
+            <textarea id="job-description" rows="10" placeholder="Paste the JD here..." required></textarea>
+          </label>
+          <button type="submit">Upload Resume</button>
+        </form>
+        <div class="meta" id="resume-summary"></div>
+      </article>
+
+      <article class="panel">
+        <h3>2. Interview Control</h3>
+        <div class="controls">
+          <button id="start-btn" disabled>Start Interview</button>
+          <button id="end-btn" disabled>End Interview</button>
+          <button id="submit-btn" disabled hidden>Submit Answer</button>
+        </div>
+        <div class="stats">
+          <div><span>Candidate</span><strong id="candidate-name">Not loaded</strong></div>
+          <div><span>Interview</span><strong id="interview-id">-</strong></div>
+          <div><span>Question</span><strong id="question-counter">0 / 0</strong></div>
+          <div><span>Status</span><strong id="interview-status">Waiting</strong></div>
+        </div>
+        <div class="question-card">
+          <p class="label">Current Question</p>
+          <h4 id="question-text">No active interview yet.</h4>
+          <p id="question-focus">Expected focus will appear here.</p>
+        </div>
+        <label>
+          Candidate Answer
+          <textarea id="answer-box" rows="8" placeholder="Speech transcription or typed answer..."></textarea>
+        </label>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h3>Answer Evaluation</h3>
+        <div class="score-grid">
+          <div><span>Correctness</span><strong id="score-correctness">-</strong></div>
+          <div><span>Clarity</span><strong id="score-clarity">-</strong></div>
+          <div><span>Depth</span><strong id="score-depth">-</strong></div>
+          <div><span>Overall</span><strong id="score-overall">-</strong></div>
+        </div>
+        <p id="answer-feedback" class="feedback">Answer feedback will appear here.</p>
+      </article>
+
+      <article class="panel">
+        <h3>Final Report</h3>
+        <button id="report-btn" disabled>Generate Report</button>
+        <pre id="report-output">No report generated yet.</pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
